@@ -4,22 +4,29 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/<your-username>/<repo>.git'
+                echo 'Checking out source code...'
+                checkout scm
             }
         }
+
         stage('Build') {
             steps {
-                sh 'echo "Build step running"'
+                echo 'Build stage started...'
+                sh 'ls -la'
+                sh 'python3 --version'
             }
         }
+
         stage('Test') {
             steps {
-                sh 'python3 calculator.py'
+                echo 'Running tests...'
+                sh 'python3 test_calculator.py'
             }
         }
+
         stage('Deploy') {
             steps {
-                sh 'echo "Deploy step"'
+                echo 'Deploy stage completed (dummy deploy for now)'
             }
         }
     }
